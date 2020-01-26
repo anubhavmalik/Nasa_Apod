@@ -1,7 +1,11 @@
 package com.anubhavmalik.nasaapod.viewmodels;
 
+import com.anubhavmalik.nasaapod.models.ImageModel;
 import com.anubhavmalik.nasaapod.repositories.ImageDataRepository;
 
+import java.util.List;
+
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -16,4 +20,7 @@ public class GridActivityViewModel extends ViewModel {
         imageDataRepository = ImageDataRepository.getInstance();
     }
 
+    public MutableLiveData<List<ImageModel>> getMutableLiveData() {
+        return imageDataRepository.getImageModelMutableLiveData();
+    }
 }

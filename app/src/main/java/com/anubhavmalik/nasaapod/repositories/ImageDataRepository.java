@@ -16,20 +16,21 @@ public class ImageDataRepository {
     private static ImageDataRepository imageDataRepository;
     private MutableLiveData<List<ImageModel>> imageModelMutableLiveData = new MutableLiveData<>();
 
-    public static ImageDataRepository getInstance(){
-        if(imageDataRepository==null){
+    public static ImageDataRepository getInstance() {
+        if (imageDataRepository == null) {
             imageDataRepository = new ImageDataRepository();
         }
         return imageDataRepository;
     }
 
-    public MutableLiveData<List<ImageModel>> getImageModelMutableLiveData(){
+    public MutableLiveData<List<ImageModel>> getImageModelMutableLiveData() {
         List<ImageModel> imageModelList = JSONUtils.getInstance().getImageModelsFromJSONFile();
-        if(imageModelList!=null){
-            imageModelMutableLiveData.postValue(imageModelList);
-            return imageModelMutableLiveData;
-        }else {
-            return null;
+        if (imageModelMutableLiveData.getValue()!=null && imageModelMutableLiveData.getValue().size() == 0) {
+            if (imageModelList != null) {
+                imageModelMutableLiveData.postValue(imageModelList);
+                return imageModelMutableLiveData;
+            }
         }
+        return null;
     }
 }
