@@ -9,11 +9,27 @@
             type="com.anubhavmalik.nasaapod.models.ImageModel" />
     </data>
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:orientation="vertical"
-        android:scaleType="centerCrop"
-        app:setImageURL="@{imageModel.getLowDefURL()}"/>
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/pbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:scaleType="centerCrop"
+            app:setProgressBar="@{pbar}"
+            app:setImageURL="@{imageModel.getLowDefURL()}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

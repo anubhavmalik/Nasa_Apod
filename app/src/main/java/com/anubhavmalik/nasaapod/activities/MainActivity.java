@@ -5,11 +5,17 @@ import android.os.Bundle;
 import com.anubhavmalik.nasaapod.R;
 import com.anubhavmalik.nasaapod.adapters.GridListAdapter;
 import com.anubhavmalik.nasaapod.databinding.ActivityMainBinding;
+import com.anubhavmalik.nasaapod.models.ImageModel;
 import com.anubhavmalik.nasaapod.viewmodels.GridActivityViewModel;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -23,18 +29,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initViewModel();
-        initAdapter();
         setDataInAdapter();
     }
 
     private void setDataInAdapter() {
-        adapter.setListMutableLiveData(viewModel.getMutableLiveData());
+        viewModel.getMutableLiveData().observe(this, new Observer<List<ImageModel>>() {
+            @Override
+            public void onChanged(List<ImageModel> imageModels) {
+                if (adapter == null)
+                    initAdapter(imageModels);
+            }
+        });
     }
 
-    private void initAdapter() {
+    private void initAdapter(List<ImageModel> imageModels) {
         adapter = new GridListAdapter();
+        adapter.setList(imageModels);
+
+        binding.gridRv.setLayoutManager(new GridLayoutManager(this, 2));
         binding.gridRv.setAdapter(adapter);
-        binding.gridRv.setLayoutManager(new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL));
     }
 
     private void initViewModel() {

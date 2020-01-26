@@ -25,12 +25,11 @@ public class ImageDataRepository {
 
     public MutableLiveData<List<ImageModel>> getImageModelMutableLiveData() {
         List<ImageModel> imageModelList = JSONUtils.getInstance().getImageModelsFromJSONFile();
-        if (imageModelMutableLiveData.getValue()!=null && imageModelMutableLiveData.getValue().size() == 0) {
+        if (imageModelMutableLiveData != null && imageModelMutableLiveData.getValue() == null) {
             if (imageModelList != null) {
                 imageModelMutableLiveData.postValue(imageModelList);
-                return imageModelMutableLiveData;
             }
         }
-        return null;
+        return imageModelMutableLiveData;
     }
 }

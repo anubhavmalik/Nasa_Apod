@@ -1,19 +1,17 @@
 package com.anubhavmalik.nasaapod.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.anubhavmalik.nasaapod.R;
 import com.anubhavmalik.nasaapod.databinding.ItemGridListBinding;
 import com.anubhavmalik.nasaapod.models.ImageModel;
-import com.anubhavmalik.nasaapod.viewmodels.GridActivityViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -22,33 +20,38 @@ import androidx.recyclerview.widget.RecyclerView;
  * All rights reserved.
  */
 public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridViewHolder> {
-    private MutableLiveData<List<ImageModel>> listMutableLiveData = new MutableLiveData<>();
+    private List<ImageModel> list = new ArrayList<>();
 
     public GridListAdapter() {
     }
 
-    public void setListMutableLiveData(MutableLiveData<List<ImageModel>> listMutableLiveData) {
-        this.listMutableLiveData = listMutableLiveData;
-        notifyDataSetChanged();
+    public void setList(List<ImageModel> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
     public GridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new GridViewHolder(ItemGridListBinding.inflate(LayoutInflater.from(parent.getContext())));
+        return new GridViewHolder(ItemGridListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull GridViewHolder holder, int position) {
-        holder.onBind(Objects.requireNonNull(listMutableLiveData.getValue()).get(position));
+        holder.onBind(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if(listMutableLiveData.getValue()!=null){
-            listMutableLiveData.getValue().size();
+        if(list!=null){
+            return list.size();
         }
         return 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        Log.d("recyclerPosition", position + "");
+        return super.getItemId(position);
     }
 
     class GridViewHolder extends RecyclerView.ViewHolder{
@@ -56,11 +59,15 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
 
         GridViewHolder(@NonNull ItemGridListBinding binding) {
             super(binding.getRoot());
+            Log.d("recyclerPosition", getAdapterPosition() + "");
+
             this.binding = binding;
         }
 
         void onBind(ImageModel imageModel){
             binding.setImageModel(imageModel);
+
+            binding.executePendingBindings();
         }
     }
 }
