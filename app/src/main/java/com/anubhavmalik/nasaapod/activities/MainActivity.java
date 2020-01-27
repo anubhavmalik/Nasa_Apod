@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -60,5 +59,6 @@ public class MainActivity extends AppCompatActivity implements GridClickListener
     @Override
     public void onItemClicked(ImageModel imageModel, int position) {
         //todo: open another activity with shared transition
+
     }
 }

@@ -23,10 +23,6 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
     private List<ImageModel> list = new ArrayList<>();
     private GridClickListener gridClickListener;
 
-    public GridClickListener getGridClickListener() {
-        return gridClickListener;
-    }
-
     public void setGridClickListener(GridClickListener gridClickListener) {
         this.gridClickListener = gridClickListener;
     }
@@ -63,24 +59,31 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
         return super.getItemId(position);
     }
 
-    class GridViewHolder extends RecyclerView.ViewHolder {
+    class GridViewHolder extends RecyclerView.ViewHolder implements GridClickListener {
         ItemGridListBinding binding;
 
         GridViewHolder(@NonNull ItemGridListBinding binding) {
             super(binding.getRoot());
-            Log.d("recyclerPosition", getAdapterPosition() + "");
-
             this.binding = binding;
         }
 
         void onBind(ImageModel imageModel) {
 
             if (gridClickListener != null)
-                imageModel.setGridClickListener(gridClickListener);
+                imageModel.setGridClickListener(this);
 
             binding.setImageModel(imageModel);
 
             binding.executePendingBindings();
+        }
+
+        @Override
+        public void onItemClicked(ImageModel imageModel, int position) {
+//            Log.d("recyclerPosition", getAdapterPosition() + "");
+
+            if (gridClickListener != null) {
+                gridClickListener.onItemClicked(imageModel, getAdapterPosition());
+            }
         }
     }
 }
