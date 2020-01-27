@@ -4,12 +4,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.anubhavmalik.nasaapod.adapters.clicklisteners.GridClickListener;
 import com.anubhavmalik.nasaapod.databinding.ItemGridListBinding;
 import com.anubhavmalik.nasaapod.models.ImageModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +21,15 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridViewHolder> {
     private List<ImageModel> list = new ArrayList<>();
+    private GridClickListener gridClickListener;
+
+    public GridClickListener getGridClickListener() {
+        return gridClickListener;
+    }
+
+    public void setGridClickListener(GridClickListener gridClickListener) {
+        this.gridClickListener = gridClickListener;
+    }
 
     public GridListAdapter() {
     }
@@ -42,7 +51,7 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
 
     @Override
     public int getItemCount() {
-        if(list!=null){
+        if (list != null) {
             return list.size();
         }
         return 0;
@@ -54,7 +63,7 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
         return super.getItemId(position);
     }
 
-    class GridViewHolder extends RecyclerView.ViewHolder{
+    class GridViewHolder extends RecyclerView.ViewHolder {
         ItemGridListBinding binding;
 
         GridViewHolder(@NonNull ItemGridListBinding binding) {
@@ -64,7 +73,11 @@ public class GridListAdapter extends RecyclerView.Adapter<GridListAdapter.GridVi
             this.binding = binding;
         }
 
-        void onBind(ImageModel imageModel){
+        void onBind(ImageModel imageModel) {
+
+            if (gridClickListener != null)
+                imageModel.setGridClickListener(gridClickListener);
+
             binding.setImageModel(imageModel);
 
             binding.executePendingBindings();

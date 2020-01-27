@@ -1,5 +1,6 @@
 package com.anubhavmalik.nasaapod.models;
 
+import com.anubhavmalik.nasaapod.adapters.clicklisteners.GridClickListener;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -35,6 +36,16 @@ public class ImageModel {
 
     @SerializedName("url")
     private String lowDefURL;
+
+    private GridClickListener gridClickListener;
+
+    public GridClickListener getGridClickListener() {
+        return gridClickListener;
+    }
+
+    public void setGridClickListener(GridClickListener gridClickListener) {
+        this.gridClickListener = gridClickListener;
+    }
 
     public String getCopyRight() {
         return copyRight;
@@ -98,5 +109,11 @@ public class ImageModel {
 
     public void setLowDefURL(String lowDefURL) {
         this.lowDefURL = lowDefURL;
+    }
+
+    public void onItemClicked(){
+        if(gridClickListener!=null){
+            gridClickListener.onItemClicked(this, -1);
+        }
     }
 }
