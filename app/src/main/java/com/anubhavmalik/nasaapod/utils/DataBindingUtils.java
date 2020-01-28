@@ -55,6 +55,7 @@ public class DataBindingUtils {
         if (imageURL != null && imageView != null) {
             Glide.with(imageView.getContext())
                     .load(imageURL)
+                    .thumbnail(0.2f)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .listener(new RequestListener<Drawable>() {
                         @Override

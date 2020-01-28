@@ -7,6 +7,7 @@ import com.anubhavmalik.nasaapod.adapters.GridListAdapter;
 import com.anubhavmalik.nasaapod.adapters.clicklisteners.GridClickListener;
 import com.anubhavmalik.nasaapod.databinding.ActivityMainBinding;
 import com.anubhavmalik.nasaapod.models.ImageModel;
+import com.anubhavmalik.nasaapod.utils.IntentUtils;
 import com.anubhavmalik.nasaapod.viewmodels.GridActivityViewModel;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -51,14 +52,13 @@ public class MainActivity extends AppCompatActivity implements GridClickListener
     }
 
     private void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(GridActivityViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(GridActivityViewModel.class);
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
     }
 
     @Override
     public void onItemClicked(ImageModel imageModel, int position) {
-        //todo: open another activity with shared transition
-
+        IntentUtils.getInstance().openImageDetailActivity(this, position);
     }
 }
