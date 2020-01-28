@@ -27,10 +27,11 @@
             app:setProgressBar="@{pbar}"
             app:zoomage_animateOnReset="true"
             app:zoomage_autoCenter="true"
-            app:zoomage_autoResetMode="ALWAYS"
+            app:zoomage_autoResetMode="UNDER"
             app:zoomage_maxScale="8"
-            app:zoomage_minScale="0.6"
+            app:zoomage_restrictBounds="false"
             app:zoomage_translatable="false"
+            app:zoomage_minScale="0.6"
             app:zoomage_zoomable="true" />
 
         <ProgressBar
@@ -46,6 +47,7 @@
             android:id="@+id/image_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
             android:text="@{imageModel.getTitle()}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +58,7 @@
             android:id="@+id/image_detail_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="popp"
             android:text="@{imageModel.getDate()}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,11 +66,14 @@
             app:layout_constraintTop_toBottomOf="@id/image_detail_title" />
 
         <TextView
+            android:id="@+id/image_detail_explanation"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="120dp"
             android:layout_margin="16dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@{imageModel.getExplanation()}"
             android:textColor="@color/white"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="wrap"

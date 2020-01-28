@@ -1,6 +1,7 @@
 package com.anubhavmalik.nasaapod.fragments;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,12 @@ public class ImageDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_detail, container, false);
         initViewModel();
+        setupUI();
         return binding.getRoot();
+    }
+
+    private void setupUI() {
+        binding.imageDetailExplanation.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void initViewModel() {

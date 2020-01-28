@@ -12,13 +12,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".activities.ImageDetailActivity">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#AA0C2962" />
+            android:nestedScrollingEnabled="true"
+            android:background="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
