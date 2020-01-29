@@ -5,14 +5,15 @@
     <data>
 
         <variable
-            name="imageModel"
-            type="com.anubhavmalik.nasaapod.models.ImageModel" />
+            name="viewModel"
+            type="com.anubhavmalik.nasaapod.viewmodels.ImageDetailFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
+        android:onClick="@{() -> viewModel.toggleShowDataStatus()}"
         android:orientation="vertical">
 
         <com.jsibbold.zoomage.ZoomageView
@@ -23,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setImageURL="@{imageModel.getHighDefURL()}"
+            app:setImageURL="@{viewModel.imageModel.getHighDefURL()}"
             app:setProgressBar="@{pbar}"
             app:zoomage_animateOnReset="true"
             app:zoomage_autoCenter="true"
@@ -47,8 +48,10 @@
             android:id="@+id/image_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="@{imageModel.getTitle()}"
+            app:setShouldShow="@{viewModel.shouldShowDetails}"
+            android:text="@{viewModel.imageModel.getTitle()}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,27 +61,37 @@
             android:id="@+id/image_detail_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="popp"
-            android:text="@{imageModel.getDate()}"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="12sp"
+            app:setShouldShow="@{viewModel.shouldShowDetails}"
+            android:text="@{viewModel.imageModel.getDate()}"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/image_detail_title"
+            app:layout_constraintStart_toStartOf="@id/image_detail_title"
             app:layout_constraintTop_toBottomOf="@id/image_detail_title" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/image_detail_explanation_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75"/>
 
         <TextView
             android:id="@+id/image_detail_explanation"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@{imageModel.getExplanation()}"
+            android:text="@{viewModel.imageModel.getExplanation()}"
             android:textColor="@color/white"
+            app:setShouldShow="@{viewModel.shouldShowDetails}"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="wrap"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_detail_date"
+            app:layout_constraintTop_toBottomOf="@id/image_detail_explanation_guide"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

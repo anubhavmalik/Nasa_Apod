@@ -1,8 +1,10 @@
 package com.anubhavmalik.nasaapod.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -41,8 +43,22 @@ public class ImageDetailFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupUI() {
         binding.imageDetailExplanation.setMovementMethod(new ScrollingMovementMethod());
+
+        binding.imageDetailHdImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (binding.imageDetailHdImage.getCurrentScaleFactor() > 1f || binding.imageDetailHdImage.getCurrentScaleFactor() < 1f) {
+                    binding.imageDetailHdImage.setTranslatable(true);
+                } else {
+                    binding.imageDetailHdImage.setTranslatable(false);
+                }
+
+                return binding.imageDetailHdImage.onTouchEvent(event);
+            }
+        });
     }
 
     private void initViewModel() {
@@ -54,7 +70,7 @@ public class ImageDetailFragment extends Fragment {
             }
         } else {
             imageDetailFragmentViewModel.initializeImageModelFromPosition(position);
-            binding.setImageModel(imageDetailFragmentViewModel.imageModel);
+            binding.setViewModel(imageDetailFragmentViewModel);
         }
     }
 

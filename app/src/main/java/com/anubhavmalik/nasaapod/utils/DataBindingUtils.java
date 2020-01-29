@@ -17,6 +17,7 @@ import com.jsibbold.zoomage.ZoomageView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableBoolean;
 
 /**
  * Created by Anubhav Malik on Sun 26 Jan,2020
@@ -71,6 +72,17 @@ public class DataBindingUtils {
                     })
                     .format(DecodeFormat.PREFER_RGB_565)
                     .into(imageView);
+        }
+    }
+
+    @BindingAdapter(value = {"setShouldShow"})
+    public static void setShouldShow(View view, ObservableBoolean shouldShow){
+        if(view!=null && shouldShow!=null){
+            if(shouldShow.get()){
+                view.setAlpha(1f);
+            }else {
+                view.setAlpha(0);
+            }
         }
     }
 }

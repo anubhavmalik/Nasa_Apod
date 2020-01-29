@@ -37,6 +37,7 @@ public class ImageDetailActivity extends AppCompatActivity {
         imageDetailsPagerAdapter = new ImageDetailsPagerAdapter(this);
         binding.viewPager.setAdapter(imageDetailsPagerAdapter);
         binding.viewPager.setCurrentItem(getSelectedPosition());
+
         binding.viewPager.setOffscreenPageLimit(3);
         binding.viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.viewPager.canScrollHorizontally(ViewPager2.ORIENTATION_HORIZONTAL);

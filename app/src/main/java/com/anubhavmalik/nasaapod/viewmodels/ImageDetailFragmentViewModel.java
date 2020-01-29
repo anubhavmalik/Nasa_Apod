@@ -3,6 +3,7 @@ package com.anubhavmalik.nasaapod.viewmodels;
 import com.anubhavmalik.nasaapod.models.ImageModel;
 import com.anubhavmalik.nasaapod.repositories.ImageDataRepository;
 
+import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModel;
  * All rights reserved.
  */
 public class ImageDetailFragmentViewModel extends ViewModel {
+    public ObservableBoolean shouldShowDetails = new ObservableBoolean(true);
     public ImageModel imageModel;
 
     public ImageDetailFragmentViewModel() {
@@ -18,5 +20,9 @@ public class ImageDetailFragmentViewModel extends ViewModel {
 
     public void initializeImageModelFromPosition(int position){
         imageModel = ImageDataRepository.getInstance().getImageModelAtPosition(position);
+    }
+
+    public void toggleShowDataStatus(){
+        shouldShowDetails.set(!shouldShowDetails.get());
     }
 }

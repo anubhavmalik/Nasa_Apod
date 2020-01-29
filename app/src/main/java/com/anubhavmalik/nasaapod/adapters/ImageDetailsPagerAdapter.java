@@ -29,10 +29,6 @@ public class ImageDetailsPagerAdapter extends FragmentStateAdapter {
     public ImageDetailsPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-//
-//    public ImageDetailsPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-//        super(fm, behavior);
-//    }
 
     private List<Fragment> fillFragmentList() {
         List<Fragment> list = new ArrayList<>();
@@ -41,17 +37,6 @@ public class ImageDetailsPagerAdapter extends FragmentStateAdapter {
         }
         return list;
     }
-
-//    @NonNull
-//    @Override
-//    public Fragment getItem(int position) {
-//        return fragmentList.get(position);
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return fragmentList.size();
-//    }
 
     private Bundle getBundleWithPosition(int position){
         Bundle bundle = new Bundle();
