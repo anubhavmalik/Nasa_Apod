@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.anubhavmalik.nasaapod.viewmodels.ImageDetailFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:onClick="@{() -> viewModel.toggleShowDataStatus()}"
+        android:orientation="vertical">
+
+        <com.jsibbold.zoomage.ZoomageView
+            android:id="@+id/image_detail_hd_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setImageURL="@{viewModel.imageModel.getHighDefURL()}"
+            app:setProgressBar="@{pbar}"
+            app:zoomage_animateOnReset="true"
+            app:zoomage_autoCenter="true"
+            app:zoomage_autoResetMode="UNDER"
+            app:zoomage_maxScale="8"
+            app:zoomage_minScale="0.6"
+            app:zoomage_restrictBounds="false"
+            app:zoomage_translatable="false"
+            app:zoomage_zoomable="true" />
+
+        <ProgressBar
+            android:id="@+id/pbar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/image_detail_hd_image"
+            app:layout_constraintEnd_toEndOf="@id/image_detail_hd_image"
+            app:layout_constraintStart_toStartOf="@id/image_detail_hd_image"
+            app:layout_constraintTop_toTopOf="@id/image_detail_hd_image" />
+
+        <TextView
+            android:id="@+id/image_detail_title"
+            style="@style/AppTextViewSecondarySemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@{viewModel.imageModel.getTitle()}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setShouldShow="@{viewModel.shouldShowDetails}" />
+
+        <TextView
+            android:id="@+id/image_detail_date"
+            style="@style/AppTextViewTertiarySemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.imageModel.getDate()}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/image_detail_title"
+            app:layout_constraintStart_toStartOf="@id/image_detail_title"
+            app:layout_constraintTop_toBottomOf="@id/image_detail_title"
+            app:setShouldShow="@{viewModel.shouldShowDetails}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1">
+
+            <TextView
+                android:id="@+id/image_detail_explanation"
+                style="@style/AppTextViewSecondaryMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fadeScrollbars="true"
+                android:gravity="bottom"
+                android:scrollbars="vertical"
+                android:text="@{viewModel.imageModel.getExplanation()}"
+                app:setShouldShow="@{viewModel.shouldShowDetails}" />
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

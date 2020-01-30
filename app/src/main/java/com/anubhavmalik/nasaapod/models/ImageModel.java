@@ -3,6 +3,9 @@ package com.anubhavmalik.nasaapod.models;
 import com.anubhavmalik.nasaapod.adapters.clicklisteners.GridClickListener;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Anubhav Malik on Sun 26 Jan,2020
  * Copyright (c) 2020 Socnet Technologies Pvt Ltd
@@ -115,5 +118,19 @@ public class ImageModel {
         if(gridClickListener!=null){
             gridClickListener.onItemClicked(this, -1);
         }
+    }
+
+    public Date getFormattedDate(){
+        if(date!=null){
+            try {
+                String dateInString = new java.text.SimpleDateFormat("yyyy-MM-dd")
+                        .format(date);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                return formatter.parse(dateInString);
+            }catch (Exception e){
+                return null;
+            }
+        }
+        return null;
     }
 }

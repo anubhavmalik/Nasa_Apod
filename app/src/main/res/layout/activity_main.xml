@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.anubhavmalik.nasaapod.viewmodels.GridActivityViewModel" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +27,33 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0" />
+
+        <LinearLayout
+            android:visibility="@{viewModel.listLoadFailed ? View.VISIBLE : View.GONE}"
+            android:id="@+id/error_layout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ufo"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTextViewPrimarySemiBold"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.reloadPage()}"
+                android:text="@string/error_msg"/>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

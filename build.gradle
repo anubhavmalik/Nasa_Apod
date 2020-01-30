@@ -33,4 +33,5 @@ ext{
     gsonVersion = '2.8.5'
     lottieVersion = '3.0.7'
     lifeCycleExtensionVersion = '2.2.0'
+    viewPager2Version = '1.0.0'
 }

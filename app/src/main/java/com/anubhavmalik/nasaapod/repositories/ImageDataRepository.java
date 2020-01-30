@@ -15,6 +15,7 @@ import androidx.lifecycle.MutableLiveData;
 public class ImageDataRepository {
     private static ImageDataRepository imageDataRepository;
     private MutableLiveData<List<ImageModel>> imageModelMutableLiveData = new MutableLiveData<>();
+    private List<ImageModel> imageModelList = JSONUtils.getInstance().getImageModelsFromJSONFile();
 
     public static ImageDataRepository getInstance() {
         if (imageDataRepository == null) {
@@ -23,13 +24,23 @@ public class ImageDataRepository {
         return imageDataRepository;
     }
 
+    public List<ImageModel> getImageModelList() {
+        return imageModelList;
+    }
+
     public MutableLiveData<List<ImageModel>> getImageModelMutableLiveData() {
-        List<ImageModel> imageModelList = JSONUtils.getInstance().getImageModelsFromJSONFile();
         if (imageModelMutableLiveData != null && imageModelMutableLiveData.getValue() == null) {
             if (imageModelList != null) {
                 imageModelMutableLiveData.postValue(imageModelList);
             }
         }
         return imageModelMutableLiveData;
+    }
+
+    public ImageModel getImageModelAtPosition(int position) {
+        if (imageModelList != null && imageModelList.size() > position) {
+            return imageModelList.get(position);
+        }
+        return null;
     }
 }
