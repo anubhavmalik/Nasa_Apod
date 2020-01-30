@@ -8,6 +8,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,8 +38,19 @@ public class JSONUtils {
         if (json != null) {
             if (!json.isEmpty()) {
                 try {
-                    return gson.fromJson(json, new TypeToken<List<ImageModel>>() {
+                    List<ImageModel> list = gson.fromJson(json, new TypeToken<List<ImageModel>>() {
                     }.getType());
+
+                    //sorting the list to most recent
+                    Collections.sort(list, new Comparator<ImageModel>() {
+                        public int compare(ImageModel o1, ImageModel o2) {
+                            if (o1.getFormattedDate() == null || o2.getFormattedDate() == null)
+                                return 0;
+                            return o1.getDate().compareTo(o2.getDate());
+                        }
+                    });
+
+                    return list;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
