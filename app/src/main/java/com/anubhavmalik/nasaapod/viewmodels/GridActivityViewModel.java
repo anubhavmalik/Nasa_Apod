@@ -5,6 +5,7 @@ import com.anubhavmalik.nasaapod.repositories.ImageDataRepository;
 
 import java.util.List;
 
+import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModel;
  * All rights reserved.
  */
 public class GridActivityViewModel extends ViewModel {
+    private ObservableBoolean listLoadFailed = new ObservableBoolean(false);
     private ImageDataRepository imageDataRepository;
 
     public GridActivityViewModel() {
@@ -22,5 +24,13 @@ public class GridActivityViewModel extends ViewModel {
 
     public MutableLiveData<List<ImageModel>> getMutableLiveData() {
         return imageDataRepository.getImageModelMutableLiveData();
+    }
+
+    public void setListLoadFailed(boolean listLoadFailed) {
+        this.listLoadFailed.set(listLoadFailed);
+    }
+
+    public void reloadPage(){
+
     }
 }

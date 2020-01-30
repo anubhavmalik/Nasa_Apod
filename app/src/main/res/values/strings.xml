@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nasa Apod</string>
+    <string name="error_msg">"Oops! Something just went horrifyingly wrong. Maybe it\'s an alien conspiracy! \n\nYou can try to load this again by clicking here."</string>
 </resources>

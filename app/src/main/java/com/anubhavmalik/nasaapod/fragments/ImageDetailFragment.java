@@ -47,6 +47,8 @@ public class ImageDetailFragment extends Fragment {
     private void setupUI() {
         binding.imageDetailExplanation.setMovementMethod(new ScrollingMovementMethod());
 
+        binding.imageDetailExplanation.scrollTo(0,0);
+
         binding.imageDetailHdImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
