@@ -45,9 +45,9 @@ public class ImageDetailFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void setupUI() {
-        binding.imageDetailExplanation.setMovementMethod(new ScrollingMovementMethod());
-
-        binding.imageDetailExplanation.scrollTo(0,0);
+//        binding.imageDetailExplanation.setMovementMethod(new ScrollingMovementMethod());
+//
+//        binding.imageDetailExplanation.scrollTo(0,0);
 
         binding.imageDetailHdImage.setOnTouchListener(new View.OnTouchListener() {
             @Override

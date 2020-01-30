@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModel;
  * All rights reserved.
  */
 public class GridActivityViewModel extends ViewModel {
-    private ObservableBoolean listLoadFailed = new ObservableBoolean(false);
+    public ObservableBoolean listLoadFailed = new ObservableBoolean(false);
     private ImageDataRepository imageDataRepository;
 
     public GridActivityViewModel() {

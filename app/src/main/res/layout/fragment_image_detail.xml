@@ -46,10 +46,10 @@
 
         <TextView
             android:id="@+id/image_detail_title"
+            style="@style/AppTextViewSecondarySemiBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/AppTextViewSecondarySemiBold"
             android:text="@{viewModel.imageModel.getTitle()}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,9 +59,9 @@
 
         <TextView
             android:id="@+id/image_detail_date"
+            style="@style/AppTextViewTertiarySemiBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/AppTextViewTertiarySemiBold"
             android:text="@{viewModel.imageModel.getDate()}"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -70,24 +70,29 @@
             app:layout_constraintTop_toBottomOf="@id/image_detail_title"
             app:setShouldShow="@{viewModel.shouldShowDetails}" />
 
-        <TextView
-            android:id="@+id/image_detail_explanation"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:layout_margin="16dp"
-            android:fadeScrollbars="true"
-            style="@style/AppTextViewSecondaryMedium"
-            android:gravity="bottom"
-            android:scrollbars="vertical"
-            android:text="@{viewModel.imageModel.getExplanation()}"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="wrap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1"
-            app:setShouldShow="@{viewModel.shouldShowDetails}" />
+            app:layout_constraintVertical_bias="1">
+
+            <TextView
+                android:id="@+id/image_detail_explanation"
+                style="@style/AppTextViewSecondaryMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fadeScrollbars="true"
+                android:gravity="bottom"
+                android:scrollbars="vertical"
+                android:text="@{viewModel.imageModel.getExplanation()}"
+                app:setShouldShow="@{viewModel.shouldShowDetails}" />
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
